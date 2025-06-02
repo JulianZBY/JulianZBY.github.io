@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="JulianZBY">
+
+
+
+
+
+<title>数据结构课程笔记 | Julian&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Julian&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Julian&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">数据结构课程笔记</h1>
+            
+                <div class="post-meta">
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 2, 2025&nbsp;&nbsp;17:49:03</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>   <em>p++、</em>++p、++*p与(*p)++</p>
+<h3 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h3><ul>
+<li><strong>定义</strong><ul>
+<li>用一组地址连续的存储单元依次存放一个线性表的元素。</li>
+</ul>
+</li>
+<li><strong>地址关系</strong><ul>
+<li>(第i个元素ai的位序)</li>
+<li>LOC(ai+1) &#x3D; LOC(ai) + L </li>
+<li>LOC(ai) &#x3D; LOC(a1) + (i - 1) * L</li>
+</ul>
+</li>
+<li><strong>其中</strong><ul>
+<li>L — 一个元素占用的存储单元个数</li>
+<li>LOC(ai) — 线性表第i个元素的地址</li>
+</ul>
+</li>
+<li><strong>特点</strong><ul>
+<li>实现逻辑上相邻—物理地址相邻</li>
+<li>实现随机存取</li>
+</ul>
+</li>
+<li><strong>实现</strong><ul>
+<li>可用C语言的一维数组实现</li>
+</ul>
+</li>
+<li><strong>顺序表的基本操作</strong><ul>
+<li>插入<ul>
+<li>线性表的插入是指在第i（1 &lt;&#x3D; i &lt;&#x3D; n+1）个元素之前插入一个新的数据元素x，使长度为n的线性表变为n+1的线性表</li>
+<li>需将第 i 至第 n 共（n-i+1)个元素后移</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>优缺点</strong><ul>
+<li>优点<ul>
+<li>逻辑相邻，物理相邻</li>
+<li>可随机存取任一元素</li>
+<li>存储空间使用紧凑</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>插入、删除操作需要移动大量的元素</li>
+<li>预先分配空间需按最大空间分配，利用不充分</li>
+<li>表容量难以扩充</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><ul>
+<li><strong>定义</strong><ul>
+<li>用一组地址任意的存储单元存放线性表中的数据元素。</li>
+</ul>
+</li>
+<li><strong>其中</strong><ul>
+<li>头结点：在单链表第一个结点前<strong>附设一个结点</strong>叫头结点</li>
+<li>头指针 ：指向链表中头结点的指针叫头指针 </li>
+<li>首元结点 ：链表中第一个<strong>元素结点</strong>叫首元结点 。</li>
+</ul>
+</li>
+<li><strong>特点</strong><ul>
+<li>它是一种动态结构，整个存储空间为多个链表共用</li>
+<li>不需预先分配空间</li>
+<li>指针占用额外存储空间</li>
+<li>不能随机存取，查找速度慢</li>
+</ul>
+</li>
+<li><strong>循环链表</strong><ul>
+<li>判最后结点时，不是p-&gt;next是否为空，而是p-&gt;next是否等于头指针</li>
+</ul>
+</li>
+<li><strong>双向链表</strong><ul>
+<li>删除和插入要修改两个指针</li>
+</ul>
+</li>
+<li><strong>优缺点</strong><ul>
+<li>优点<ul>
+<li>插入、删除操作需要无需移动大量的元素</li>
+<li>无需预先分配空间，利用充分</li>
+<li>表容量易扩充</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>逻辑相邻，物理不相邻</li>
+<li>不可随机存取任一元素</li>
+<li>存储空间使用分散</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ul>
+<li><strong>定义</strong><ul>
+<li>限定仅在表尾进行插入或删除操作的线性表，表尾—栈顶，表头—栈底，不含元素的空表称空栈</li>
+</ul>
+</li>
+<li><strong>特点</strong><ul>
+<li>后进先出（LIFO）</li>
+<li>仅在表头操作，无须头结点</li>
+</ul>
+</li>
+<li><strong>顺序栈</strong><ul>
+<li>判满条件</li>
+</ul>
+</li>
+<li><strong>链栈</strong></li>
+<li><strong>算数表达式求值</strong><ul>
+<li>中缀表达式</li>
+<li>后缀表达式</li>
+<li>中缀表达式转后缀表达式</li>
+<li>后缀表达式求值</li>
+</ul>
+</li>
+<li><strong>栈与递归</strong><ul>
+<li>当在一个函数的运行期间调用另一个函数时，在运行该被调用函数之前，需先完成三项工作<ul>
+<li>现场保护：将主调函数的变量及返回地址保存。</li>
+<li>参数传递：实参和虚参对应传递；</li>
+<li>控制转移：将控制转移到被调用函数的入口。</li>
+</ul>
+</li>
+<li>从被调用函数返回调用函数之前，应该完成下列三项任务：<ul>
+<li>恢复现场：恢复主调函数的变量信息；</li>
+<li>结果返回：返回计算结果；</li>
+<li>控制返回：将控制转移到主调函数。</li>
+</ul>
+</li>
+<li><strong>多个函数嵌套调用的规则是：后调用先返回</strong></li>
+<li>递归函数的执行过程<ul>
+<li>调用：每一层递归都有自己的局部变量，参数值和返回地址等。</li>
+<li>执行：每一层递归都按照顺序执行。</li>
+<li>返回：当递归函数执行到结束条件时，逐层返回。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><ul>
+<li><strong>定义</strong><ul>
+<li>限定仅在表尾进行插入，表头进行删除操作的线性表，表尾—队尾，表头—队头，不含元素的空表称空队列</li>
+</ul>
+</li>
+<li><strong>特点</strong><ul>
+<li>先进先出（FIFO）</li>
+<li>仅在表尾操作，无须头结点</li>
+</ul>
+</li>
+<li><strong>顺序队列</strong><ul>
+<li>判满条件</li>
+</ul>
+</li>
+<li><strong>链队列</strong></li>
+<li><strong>循环队列</strong><ul>
+<li>入队：sq[rear]&#x3D;x   rear&#x3D;(rear+1)%M</li>
+<li>出队：x&#x3D;sq[front]  front&#x3D;(front+1)%M </li>
+<li>队空：front&#x3D;&#x3D;rear</li>
+<li>队满：(rear+1)%M&#x3D;&#x3D;front</li>
+</ul>
+</li>
+<li><strong>队列的应用</strong><ul>
+<li>层次遍历</li>
+</ul>
+</li>
+</ul>
+<h2 id="串"><a href="#串" class="headerlink" title="串"></a>串</h2><h3 id="串的定义"><a href="#串的定义" class="headerlink" title="串的定义"></a>串的定义</h3><ul>
+<li>串是由零个或多个字符组成的有限序列，是一种特殊的线性表</li>
+<li>一般记为s&#x3D;’a1a2…an’ (n&gt;&#x3D;0)</li>
+<li>子串在主串中的位置指子串中的第一个字符在主串中的位序。</li>
+</ul>
+<h3 id="串的表示和实现"><a href="#串的表示和实现" class="headerlink" title="串的表示和实现"></a>串的表示和实现</h3><ul>
+<li>串的顺序存储结构</li>
+<li>串的堆分配存储结构</li>
+<li>串的块链存储结构</li>
+</ul>
+<h3 id="串的模式匹配"><a href="#串的模式匹配" class="headerlink" title="串的模式匹配"></a>串的模式匹配</h3><ul>
+<li>简单算法</li>
+<li>首尾匹配算法</li>
+<li><strong>KMP算法</strong><ul>
+<li>求next数组</li>
+<li>求nextval数组</li>
+<li>KMP算法</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/06/01/hexo%E5%85%A5%E9%97%A8%E4%BD%BF%E7%94%A8/">Hexo入门教程</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© JulianZBY | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
