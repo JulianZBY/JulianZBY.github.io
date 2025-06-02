@@ -277,7 +277,7 @@
 <h3 id="4-推送"><a href="#4-推送" class="headerlink" title="4.推送"></a>4.推送</h3><p>vscode终端输入以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;初始化 Hexo 源码&quot;</span></span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
 <p>以上将本地文件推送到github的blog-source仓库中。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 <p>以上blog文件夹下的public文件夹下的静态文件推送到github的username.github.io仓库中。</p>
 <p>也就是说，全部的blog源文件保存到blog-source仓库中，而源文件中的public文件夹下的静态文件会保存到username.github.io仓库中，也就是当前的博客网站。</p>
 <p>现在就可以在浏览器中访问你的博客网站了。<br>输入<a target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io</a> 即可访问你的个人博客网站。</p>
