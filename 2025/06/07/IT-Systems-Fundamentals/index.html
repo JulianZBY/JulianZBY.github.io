@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="JulianZBY">
+
+
+
+
+
+<title>IT Systems Fundamentals | Julian&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Julian&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Julian&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">IT Systems Fundamentals</h1>
+            
+                <div class="post-meta">
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 7, 2025&nbsp;&nbsp;17:10:21</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="Introduction-types-IS"><a href="#Introduction-types-IS" class="headerlink" title="Introduction + types IS"></a><strong>Introduction + types IS</strong></h3><ul>
+<li><p><strong>Organisation and customer</strong></p>
+<ul>
+<li><strong>Organisations:</strong> An organization refers to a collection of people, who are involved in pursuing defined objectives. It can be understood as a social system which comprises all formal human relationships. The organization encompasses division of work among employees and alignment of tasks towards the ultimate goal of the company.</li>
+<li><strong>Customers:</strong> A customer is an individual or business that purchases another company’s goods or services. Customers are important because they drive revenues; without them, businesses cannot continue to exist.</li>
+</ul>
+</li>
+<li><p><strong>ICT components</strong></p>
+<ul>
+<li><strong>Hardware:</strong> Includes input devices such as keyboards and output devices such as monitors.</li>
+<li><strong>Software:</strong> Includes Windows OS, MS Word, and Java.</li>
+<li><strong>Data management technology:</strong> Includes MS Access and Oracle.</li>
+<li><strong>Data Communication Technology:</strong> Includes Routers and cables.</li>
+</ul>
+</li>
+<li><p><strong>Value and justification of ICT</strong></p>
+<ul>
+<li><strong>Value of ICT:</strong> ICT can at times be difficult to explain in terms of its value to a business. ICT is translated into value through the mediating force of information. This means that to be of value the business should ensure that the ICT infrastructure matches their information needs.</li>
+<li><strong>Justification for ICT:</strong> Manual production of information to interested parties is time-consuming. Transferring information from delivery notes to job sheets takes time. Human error is possible at each stage of sharing information. Managers cannot collate the information held manually to assess productivity.</li>
+</ul>
+</li>
+<li><p><strong>Customer Relationship Management (CRM), B2B, B2C, Hybrid</strong></p>
+<ul>
+<li><strong>Customer Relationship Management (CRM):</strong> CRM as a Strategy involves a customer-centric focus, understanding current and future needs, employee involvement, and a focus on employees, tools, and processes for customer well-being and business outcomes. The traditional aspects of a CRM system are Customer Service, Sales, and Marketing.</li>
+<li><strong>B2B (Business-to-Business):</strong> This is the electronic transaction of services or products between two companies or businesses. Examples include advertising agencies and web hosting services.</li>
+<li><strong>B2C (Business-to-Consumer):</strong> This is the most common form of e-commerce as it is the relationship between a seller and final customers. Examples include housecleaning services, restaurants, and retail stores.</li>
+<li><strong>Hybrid:</strong> This model involves multiple types of relationships. An example is the book-publishing industry, where authors market to publishers (B2B) who in turn sell to consumers.</li>
+</ul>
+</li>
+<li><p><strong>What do we do with data</strong></p>
+<ul>
+<li>Data is handled through several key activities: Gather, Store, Process, Retrieve, and Disseminate.</li>
+</ul>
+</li>
+<li><p><strong>Types of business information system</strong></p>
+<ul>
+<li>The main types of business information systems are:<ul>
+<li>Manual system</li>
+<li>Transaction processing system</li>
+<li>Management information systems</li>
+<li>Data warehouse system</li>
+<li>Decision support system</li>
+<li>Knowledge based system</li>
+<li>Executive information system</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Data-and-database-database-development-manipulation"><a href="#Data-and-database-database-development-manipulation" class="headerlink" title="Data and database, database development &amp; manipulation"></a><strong>Data and database, database development &amp; manipulation</strong></h3><ul>
+<li><p><strong>Data, database, DBMS and Information, front-end and back-end database</strong></p>
+<ul>
+<li><strong>Data vs. Information:</strong> Data is raw, unorganized facts that need to be processed. When data is processed, organized, structured or presented in a given context so as to make it useful, it is called information.</li>
+<li><strong>Database:</strong> A database is an integrated collection of logically related records or an organised collection of related data.</li>
+<li><strong>Database Management System (DBMS):</strong> A DBMS serves as a software interface between users and databases. It is a general purpose software system for creating, querying, and managing databases.</li>
+<li><strong>Front-end and Back-end:</strong> A functional website has two parts: a frontend for dealing directly with customers and a backend to automate the online operations of the company without having direct dealing with customers.</li>
+</ul>
+</li>
+<li><p><strong>Data validation &amp; verification</strong></p>
+<ul>
+<li>“The quality of information depends on the quality of the data”.</li>
+<li><strong>Validation:</strong> Involves setting rules for data, such as a required format (e.g., DD&#x2F;MM&#x2F;YYYY) or accuracy (e.g., field length).</li>
+<li><strong>Verification:</strong> Ensures data is entered and transmitted correctly, for example, by asking a user to enter an email address twice to check for a match.</li>
+<li>A key principle is “GIGO” - garbage in, garbage out.</li>
+</ul>
+</li>
+<li><p><strong>Relational database</strong></p>
+<ul>
+<li>A relational database is perceived by the user as solely a collection of relations (tables). It uses these tables to represent both data and the relationships among those data.</li>
+</ul>
+</li>
+<li><p><strong>Entity, attribute, primary key, foreign key, unique key, not null, table</strong></p>
+<ul>
+<li><strong>Entity:</strong> An object which exists in the real world and is of interest to the system. It becomes a table in the database.</li>
+<li><strong>Attribute:</strong> A property of an entity. It becomes a field or column in a table.</li>
+<li><strong>Primary Key:</strong> A combination of a NOT NULL and UNIQUE constraint that uniquely identifies each row in a table.</li>
+<li><strong>Foreign Key:</strong> Prevents actions that would destroy links between tables. It creates a relationship by referencing the primary key of another table.</li>
+<li><strong>Unique Key:</strong> Ensures that all values in a column are different.</li>
+<li><strong>Not Null:</strong> A constraint that ensures a column cannot have a NULL value.</li>
+<li><strong>Table:</strong> A collection of related data records, also known as a relation.</li>
+</ul>
+</li>
+<li><p><strong>Degrees of relationship</strong></p>
+<ul>
+<li>The degree of a relationship is the number of participating entities.</li>
+<li><strong>One-to-one (1:1):</strong> Example: Department and Manager.</li>
+<li><strong>One-to-many (1:N):</strong> Example: Course and Module.</li>
+<li><strong>Many-to-many (N:M):</strong> Example: Module and Student.</li>
+</ul>
+</li>
+<li><p><strong>Data model (conceptual, representation, physical, E&#x2F;R)</strong></p>
+<ul>
+<li><strong>Data Model:</strong> An abstract model that organizes data description, data semantics, and consistency constraints of data.</li>
+<li><strong>Conceptual Data Model:</strong> A high-level description useful for requirements understanding. The Entity-Relationship (E&#x2F;R) Model is an example.</li>
+<li><strong>Representational Data Model:</strong> Describes the logical representation of data without physical details. The relational model is an example.</li>
+<li><strong>Physical Data Model:</strong> Describes details about record formats and file structures.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ICT-systems-infrastructure-Business-environment"><a href="#ICT-systems-infrastructure-Business-environment" class="headerlink" title="ICT systems infrastructure &amp; Business environment"></a><strong>ICT systems infrastructure &amp; Business environment</strong></h3><ul>
+<li><p><strong>Subsystem of a computer system</strong></p>
+<ul>
+<li><em>This topic is mentioned in the review notes but is not explicitly defined or detailed in the provided presentation documents.</em></li>
+</ul>
+</li>
+<li><p><strong>Layer of ICT</strong></p>
+<ul>
+<li>The documents describe the components of an Information System, which can be seen as layers: Technology (hardware, software, communications), Processes, Structure (organizational design), and People (designers, users, managers).</li>
+</ul>
+</li>
+<li><p><strong>Electronic business, electronic commerce and electronic government</strong></p>
+<ul>
+<li><strong>E-business and its components:</strong> E-business is the conduct of business processes on the internet. Components include E-Procurement, Online Stores, Online Marketplace, Online Communities, and Online Companies.</li>
+<li><strong>E-business model:</strong> A model that describes how a company functions to provide services and generate profits. It consists of the E-business Concept, Value Proposition, Sources of Revenue, and Required Activities&#x2F;Resources.</li>
+<li><strong>E-commerce and its types (B2B, B2C, C2C, C2B):</strong> E-commerce refers to the buying and selling of services&#x2F;products online. The main types are Business to Business (B2B), Business to Consumer (B2C), Consumer to Consumer (C2C), and Consumer to Business (C2B).</li>
+<li><strong>Online ordering and payment system:</strong> The online ordering process includes a customer using an online catalogue to create a sales order, which is processed by back-end ICT systems that check inventory and customer data. Payment is handled via a payment processing system that interacts with a financial intermediary.</li>
+<li><strong>E-Governance and its benefits:</strong> E-governance is the integration of Information and Communication Technology (ICT) in all government processes to enhance its ability to address public needs. Benefits include reduced corruption, high transparency, increased convenience, and growth in GDP.</li>
+<li><strong>Types of E-governance:</strong> Interactions are categorized as G2G (Government to Government), G2C (Government to Citizen), G2B (Government to Business), and G2E (Government to Employees).</li>
+</ul>
+</li>
+</ul>
+<h3 id="Legislation"><a href="#Legislation" class="headerlink" title="Legislation"></a><strong>Legislation</strong></h3><ul>
+<li><p><strong>What is GDPR and Legislation</strong></p>
+<ul>
+<li><strong>Legislation:</strong> Key acts affecting IS Professionals include the Computer Misuse Act 1990, Communications Act 2003, Investigatory Powers Act 2016, and the Data Protection Act 2018 (which incorporates GDPR).</li>
+<li><strong>GDPR:</strong> The General Data Protection Regulation is a binding legislative act from the European Union for the protection of personal data. It is integral to the UK’s Data Protection Act (2018).</li>
+</ul>
+</li>
+<li><p><strong>What is a Data Controller, a Data Processor and a Data Subject</strong></p>
+<ul>
+<li><strong>Data Controller:</strong> Collects Personal Data and decides what will happen to it.</li>
+<li><strong>Data Processor:</strong> Carries out processing on the data as instructed by the Data Controller.</li>
+<li><strong>Data Subject:</strong> The individual who has submitted Personal Data.</li>
+</ul>
+</li>
+<li><p><strong>What is the Information Commissioner’s Office (ICO)</strong></p>
+<ul>
+<li>The ICO is the UK’s independent authority set up to uphold information rights. It ensures organizations comply with data laws and can take action like issuing fines. Data breaches must be reported to the ICO within 72 hours.</li>
+</ul>
+</li>
+<li><p><strong>The GDPR is underpinned by 6 data principles</strong></p>
+<ol>
+<li><strong>Lawfulness, fairness and transparency:</strong> Personal data shall be processed lawfully, fairly and in a transparent manner.</li>
+<li><strong>Purpose limitation:</strong> Data must be collected for specified, explicit and legitimate purposes.</li>
+<li><strong>Data minimisation:</strong> Data collected must be adequate, relevant and limited to what is necessary.</li>
+<li><strong>Accuracy:</strong> Data must be accurate and, where necessary, kept up to date.</li>
+<li><strong>Storage limitation:</strong> Data should be kept for no longer than is necessary for the purposes for which it was processed.</li>
+<li><strong>Integrity and confidentiality (Security):</strong> Data must be processed in a manner that ensures appropriate security.</li>
+<li><strong>Accountability:</strong> The controller is responsible for, and must be able to demonstrate, compliance with the above principles.</li>
+</ol>
+</li>
+</ul>
+<h3 id="Data-protection-officer-DPO-responsibilities"><a href="#Data-protection-officer-DPO-responsibilities" class="headerlink" title="Data protection officer (DPO) responsibilities"></a><strong>Data protection officer (DPO) responsibilities</strong></h3><ul>
+<li>A DPO role is mandatory for public authorities, companies that perform large-scale systematic monitoring, or those processing large-scale sensitive data.</li>
+<li><strong>Responsibilities include:</strong><ul>
+<li>Educating the company and employees on compliance requirements.</li>
+<li>Training staff involved in data processing.</li>
+<li>Conducting audits to ensure compliance.</li>
+<li>Serving as the point of contact between the company and the ICO.</li>
+<li>Maintaining records of all data processing activities.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Big-data-data-visualisations"><a href="#Big-data-data-visualisations" class="headerlink" title="Big data &amp; data visualisations"></a><strong>Big data &amp; data visualisations</strong></h3><ul>
+<li><p><strong>What is big data</strong></p>
+<ul>
+<li>Big Data is data that is too large or too complex to be managed using traditional data processing, analysis, and storage techniques. It is often characterized by the “4 V’s”:<ul>
+<li><strong>Volume:</strong> The amount of data.</li>
+<li><strong>Variety:</strong> The different types of data.</li>
+<li><strong>Velocity:</strong> The frequency or speed of data generation.</li>
+<li><strong>Veracity:</strong> The quality and trustworthiness of data.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Types of data (quantitative &amp; qualitative data). Difference between them</strong></p>
+<ul>
+<li><strong>Quantitative Data:</strong> This data is measurable and is collected through measuring things that have a fixed reality. It is close-ended.</li>
+<li><strong>Qualitative Data:</strong> This data is descriptive and is collected through observation, interviews, and other methods. It is open-ended.</li>
+</ul>
+</li>
+<li><p><strong>The right chart to use (bar, pie, line, scatter plot, area and bubble) Chart selection tips</strong></p>
+<ul>
+<li><strong>Bar Charts:</strong> Use for comparing parts of a whole, showing change over time, or when you have long category labels. Avoid if you have too many data points or more than 10 categories.</li>
+<li><strong>Pie Charts:</strong> Use to show relative proportions and percentages of a whole dataset, especially with small datasets. Avoid with large datasets or for precise value comparisons.</li>
+<li><strong>Line Charts:</strong> Use for continuous datasets that change over time, especially large ones. Use to visualize trends rather than exact values. Avoid for small datasets.</li>
+<li><strong>Scatter Plots:</strong> Use to show correlation and clustering in large datasets where the order of points is not essential. Avoid if you have a small dataset or the values are not correlated.</li>
+<li><strong>Area Charts:</strong> Use to show part-to-whole relations and to portray the volume of data over time. Cannot be used with discrete data.</li>
+<li><strong>Bubble Charts:</strong> Use to compare independent values or show distribution&#x2F;relation. Avoid with small datasets.</li>
+<li><strong>Chart Selection Tip:</strong> To compare values, use a pie chart for relative comparison or a bar chart for precise comparison. To show trends, use a line chart, bar chart, or scatter plot.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Security-and-Data-Protection-Act"><a href="#Security-and-Data-Protection-Act" class="headerlink" title="Security and Data Protection Act"></a><strong>Security and Data Protection Act</strong></h3><ul>
+<li><p><strong>Single key and public key encryption</strong></p>
+<ul>
+<li><strong>Single-key (Symmetric) Encryption:</strong> Uses a single shared secret key and an algorithm to encrypt and decrypt a message. Its main problem is the secure distribution of the shared secret key.</li>
+<li><strong>Public Key (Asymmetric) Encryption:</strong> Uses a pair of keys, one public and one private. A message encrypted with the public key can only be decrypted with the corresponding private key. This method is more computationally expensive.</li>
+</ul>
+</li>
+<li><p><strong>Encryption, authentication, digital signature</strong></p>
+<ul>
+<li><strong>Encryption:</strong> The process of changing text or data in such a way that only authorized persons can change it back.</li>
+<li><strong>Authentication:</strong> The confirmation that the person or computer you are communicating with is who they claim to be. Common methods include passwords, digital signatures, and biometric ID.</li>
+<li><strong>Digital Signatures:</strong> Used for authentication of the sender and to confirm the integrity of a message. It is created by making a hash of the message, adding a certificate, and encrypting the result with the sender’s private key.</li>
+</ul>
+</li>
+<li><p><strong>Why do we need to know about data protection</strong></p>
+<ul>
+<li>As a computing professional, you will either handle information about people or design systems that do. Personal information is legally protected by the Data Protection Act (2018), which incorporates GDPR. Failure to comply can result in operational disruption, significant financial penalties, and severe commercial damage to reputation. Conversely, compliance can offer a commercial advantage.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Project-Risk-and-Change-management"><a href="#Project-Risk-and-Change-management" class="headerlink" title="Project, Risk and Change management"></a><strong>Project, Risk and Change management</strong></h3><ul>
+<li><p><strong>Prince2 benefit</strong></p>
+<ul>
+<li>PRINCE2 provides proven best practice and can be used for any type of project. It offers a common vocabulary, explicit recognition of responsibilities, and a focus on the viability of the Business Case.</li>
+</ul>
+</li>
+<li><p><strong>Prince2 organization structure and roles</strong></p>
+<ul>
+<li>The structure includes a <strong>Project Board</strong> (comprised of an Executive, Senior User, and Senior Supplier), a <strong>Project Manager</strong>, and <strong>Team Managers</strong>. Other key roles are Project Assurance and Project Support.</li>
+</ul>
+</li>
+<li><p><strong>Prince2 seven principles and strengths</strong></p>
+<ul>
+<li><strong>The Seven Principles:</strong> Business justification, Learn from experience, Defined roles and responsibilities, Manage by stages, Manage by exception, Focus on products, and Tailor to suit the project environment.</li>
+<li><strong>The Seven Themes:</strong> Business Case, Organisation, Quality, Plans, Risk, Change, and Progress.</li>
+<li><strong>The Seven Phases&#x2F;Processes:</strong> Start up, Directing, Initiating, Controlling a stage, Managing Product delivery, Managing a stage boundary, and Closing a project.</li>
+<li><strong>Strengths:</strong> PRINCE2 is a transferable skill, is designed to be tailored, has clear control points, and promotes management by exception.</li>
+</ul>
+</li>
+<li><p><strong>Risk management</strong></p>
+<ul>
+<li><strong>Risk</strong> is defined as the combination of the probability of an event and its consequences, or the possibility of an event occurring that will impact the achievement of objectives.</li>
+<li><strong>Risk Management</strong> is the process of the identification of risks and their treatment.</li>
+</ul>
+</li>
+<li><p><strong>Risk management strategies</strong></p>
+<ul>
+<li>There are five main strategies for managing risk: Accept, Avoid, Transfer, Mitigate, and Exploit.</li>
+</ul>
+</li>
+<li><p><strong>Budget baseline</strong></p>
+<ul>
+<li>A budget baseline is established at two levels: the project budget, which covers the total cost of the project, and organization budgets, which are assigned to the organizations supporting the project.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Introduction-to-Sustainability"><a href="#Introduction-to-Sustainability" class="headerlink" title="Introduction to Sustainability"></a><strong>Introduction to Sustainability</strong></h3><ul>
+<li><p><strong>What is Sustainability &#x2F; Sustainable Development?</strong></p>
+<ul>
+<li>The most widely accepted definition is: “Sustainable development is development that meets the needs of the present generation without compromising the ability of future generations to meet their own needs”.</li>
+</ul>
+</li>
+<li><p><strong>Sustainability - emerging view (social, environment, economic and culture)</strong></p>
+<ul>
+<li>The emerging view of sustainability is based on four pillars:<ul>
+<li><strong>Social Sustainability:</strong> Identifying and managing business impacts on people, including employees, workers in the value chain, customers, and local communities.</li>
+<li><strong>Cultural Sustainability:</strong> Recognizing that culture shapes identity and is both an enabler and a driver of the other dimensions of sustainable development.</li>
+<li><strong>Economic Sustainability:</strong> Employing existing resources optimally so that a responsible and beneficial balance can be achieved over the longer term. In a business context, it involves using company assets efficiently to allow it to function profitably over time.</li>
+<li><strong>Environmental Sustainability:</strong> Making decisions and taking action that are in the interests of protecting the natural world.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Why study Sustainability?</strong></p>
+<ul>
+<li>Sustainability and climate change are at the top of the business agenda for both public and private sector organizations. A survey found that 85% of employers require graduates to have knowledge of sustainability. However, only 13% of organizations are confident they have the skills needed to compete in a sustainable economy, indicating a significant skills gap and demand for knowledgeable graduates.</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/06/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">数据结构课程笔记</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© JulianZBY | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
