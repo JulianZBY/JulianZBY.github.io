@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="JulianZBY">
+
+
+
+
+
+<title>Foundations of Computing | Julian&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Julian&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Julian&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Foundations of Computing</h1>
+            
+                <div class="post-meta">
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 7, 2025&nbsp;&nbsp;17:11:48</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><strong>Introduction</strong></h3><ul>
+<li><strong>Part of information system</strong>  <ul>
+<li>An information system is comprised of people, procedures, software, hardware, data, and the Internet. People are considered the most crucial component of any information system.</li>
+</ul>
+</li>
+<li><strong>System and application software</strong>  <ul>
+<li>Software, also known as programs, consists of instructions that direct a computer on how to process data into the desired form. There are two primary categories of software: System Software and Application Software.  </li>
+<li><strong>System Software:</strong> This is the software that computers use. It enables application software to interface with the computer’s hardware and assists in managing its resources. System software is a collection of programs that includes Operating Systems and Utilities.  </li>
+<li><strong>Application Software:</strong> This is software that you, the end-user, interact with. It includes general-purpose applications like word processors and spreadsheets, specialized applications like web authoring software, and mobile apps.</li>
+</ul>
+</li>
+<li><strong>B2B, B2C, C2C</strong>  <ul>
+<li>These are different types of electronic commerce.  </li>
+<li><strong>B2C (Business-to-consumer):</strong> This involves the sale of products or services to the general public and is the most rapidly expanding form of e-commerce.  </li>
+<li><strong>C2C (Consumer-to-consumer):</strong> This form of e-commerce involves transactions from one individual to another. A common example is web auctions, where buyers and sellers rarely meet in person and bids are placed electronically.  </li>
+<li><strong>B2B (Business-to-business):</strong> This involves the sale of a product or service from one business to another, typically in a manufacturer-supplier relationship.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Computer-Organization-and-Architecture"><a href="#Computer-Organization-and-Architecture" class="headerlink" title="Computer Organization and Architecture"></a><strong>Computer Organization and Architecture</strong></h3><ul>
+<li><strong>What is computer organization and architecture</strong>  <ul>
+<li><strong>Computer Architecture:</strong> Refers to the attributes of a system that a programmer can see, which directly influence the logical execution of a program. This includes the instruction set, the number of bits for data types, I&#x2F;O mechanisms, and memory addressing techniques.  </li>
+<li><strong>Computer Organization:</strong> Encompasses the operational units and their interconnections that implement the architectural specifications. This includes hardware details not visible to the programmer, like control signals, interfaces between the computer and peripherals, and the type of memory technology used.</li>
+</ul>
+</li>
+<li><strong>Function</strong>  <ul>
+<li>A computer performs four fundamental functions:  <ul>
+<li><strong>Data processing:</strong> Handling a wide array of data forms and processing needs.  </li>
+<li><strong>Data storage:</strong> Both short-term and long-term storage.  </li>
+<li><strong>Data movement:</strong> This includes input&#x2F;output (I&#x2F;O) for devices connected directly to the computer and data communications for remote devices.  </li>
+<li><strong>Control:</strong> A control unit is responsible for managing the computer’s resources and coordinating the performance of its functional components based on instructions.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>A top-down view of computer</strong>  <ul>
+<li>A computer is a hierarchical system composed of interconnected subsystems. This top-down view illustrates the structure, beginning with the overall computer system, delving into the CPU and its parts, and further into the elements of the control unit.</li>
+</ul>
+</li>
+<li><strong>Four main structural components of the computer</strong>  <ul>
+<li>The four primary structural components are:  <ul>
+<li><strong>CPU (Central Processing Unit):</strong> Manages the computer’s operations and carries out data processing functions.  </li>
+<li><strong>Main Memory:</strong> Stores data.  </li>
+<li><strong>I&#x2F;O:</strong> Facilitates data transfer between the computer and its external environment.  </li>
+<li><strong>System Interconnection:</strong> A mechanism that enables communication among the CPU, main memory, and I&#x2F;O.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>CPU-Major Structural components</strong>  <ul>
+<li>The main structural parts of the CPU include:  <ul>
+<li><strong>Control Unit:</strong> Manages the operations of the CPU and, by extension, the entire computer.  </li>
+<li><strong>Arithmetic and Logic Unit (ALU):</strong> Carries out the computer’s data processing functions.  </li>
+<li><strong>Registers:</strong> Offer storage internal to the CPU.  </li>
+<li><strong>CPU Interconnection:</strong> A mechanism that allows for communication among the control unit, ALU, and registers.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Cache memory, register, microprocessor</strong>  <ul>
+<li><strong>Cache Memory:</strong> A smaller and faster type of memory situated between the processor and main memory, designed to accelerate memory access. It holds data from main memory that is likely to be needed again soon.  </li>
+<li><strong>Register:</strong> Storage located inside the CPU that is used to temporarily hold data and results from ALU operations, memory addresses, or instructions being executed. In the IAS computer, registers included the Memory Buffer Register (MBR), Memory Address Register (MAR), Instruction Register (IR), and Program Counter (PC).  </li>
+<li><strong>Microprocessor:</strong> The component that contains all the elements of a CPU on a single chip. It is responsible for interpreting and executing instructions.</li>
+</ul>
+</li>
+<li><strong>IAS memory formats and partial flowchart of IAS operation</strong>  <ul>
+<li><strong>IAS Memory Formats:</strong> The IAS computer’s memory used 40-bit words. A number was stored as a sign bit with a 39-bit value, while an instruction word contained two separate 20-bit instructions, each with an 8-bit opcode and a 12-bit address.  </li>
+<li><strong>IAS Operation Flowchart:</strong> The operation consisted of a fetch cycle and an execution cycle. The fetch cycle would retrieve the next instruction from memory using the program counter (PC) and load it into the instruction register (IR). The execution cycle would then decode the instruction and perform the necessary action.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="A-top-level-view-of-computer"><a href="#A-top-level-view-of-computer" class="headerlink" title="A top-level view of computer"></a><strong>A top-level view of computer</strong></h3><ul>
+<li><strong>Hardware and software approaches</strong>  <ul>
+<li><strong>Hardware Approach:</strong> A “hardwired program” is created by physically connecting various components in a specific configuration, where data flows through a fixed sequence of arithmetic and logic functions.  </li>
+<li><strong>Software Approach:</strong> This method uses a sequence of instructions or codes. The hardware includes an “instruction interpreter” that reads each instruction and generates control signals for a general-purpose set of logic functions, allowing programs to be changed without rewiring.</li>
+</ul>
+</li>
+<li><strong>Software and major components</strong>  <ul>
+<li>Software is a sequence of codes or instructions. The primary hardware components required for executing software are the CPU, which includes an instruction interpreter and general-purpose arithmetic and logic functions, and I&#x2F;O Components for data input and output.</li>
+</ul>
+</li>
+<li><strong>Computer component: top-level view</strong>  <ul>
+<li>The top-level view of a computer shows the CPU, Main Memory, and I&#x2F;O Modules interconnected by a System Bus. The CPU itself contains essential registers like the Program Counter (PC), Instruction Register (IR), Memory Address Register (MAR), and Memory Buffer Register (MBR).</li>
+</ul>
+</li>
+<li><strong>Basic instruction cycle</strong>  <ul>
+<li>The fundamental instruction cycle consists of a <strong>fetch cycle</strong> followed by an <strong>execute cycle</strong>. The processor first fetches an instruction from memory and then executes it, repeating this process until the program concludes.</li>
+</ul>
+</li>
+<li><strong>Program execution</strong>  <ul>
+<li>Program execution is the process of sequentially fetching and executing instructions. An instruction is retrieved from a memory location indicated by the PC and loaded into the IR. The processor interprets the instruction’s opcode and, if necessary, fetches data from memory using the address part of the instruction. The specified operation is then performed, and the PC is updated to point to the subsequent instruction.</li>
+</ul>
+</li>
+<li><strong>Instruction cycle state diagram</strong>  <ul>
+<li>The instruction cycle can be detailed as a series of states: instruction address calculation, instruction fetch, instruction operation decoding, operand address calculation, operand fetch, data operation, and operand store. Once an instruction is fully executed, the cycle begins again to fetch the next instruction.</li>
+</ul>
+</li>
+<li><strong>Bus interconnection</strong>  <ul>
+<li>A bus is a shared communication pathway that links two or more devices, such as a CPU, memory, and I&#x2F;O modules. It consists of multiple lines for transferring data, addresses, and control signals. As a shared transmission medium, only one device can transmit at any given moment to prevent signal overlap and data corruption.</li>
+</ul>
+</li>
+<li><strong>Input-output function</strong>  <ul>
+<li>An I&#x2F;O module can exchange data directly with the processor. For efficiency, I&#x2F;O exchanges can also occur directly with memory through a method called <strong>direct memory access (DMA)</strong>. In a DMA transfer, the processor grants the I&#x2F;O module the authority to read from or write to memory, which frees the processor from managing the exchange.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Number-system"><a href="#Number-system" class="headerlink" title="Number system"></a><strong>Number system</strong></h3><ul>
+<li><strong>Positional and non-positional number system</strong>  <ul>
+<li>There are two main types of number systems: non-positional and positional.  </li>
+<li><strong>Non-positional Number Systems:</strong> Use symbols where each symbol has a fixed value regardless of its position (e.g., Roman numerals). Performing arithmetic in such systems is difficult.  </li>
+<li><strong>Positional Number Systems:</strong> Use a limited set of digits where the value of a digit is determined by its position within the number and the base of the system. Computers utilize positional systems like binary.</li>
+</ul>
+</li>
+<li><strong>Convert a number’s base to another base (binary, octal, decimal and hexadecimal)</strong>  <ul>
+<li><strong>Another Base to Decimal:</strong> To convert a number from any base to decimal, determine the positional value of each digit, multiply the digit by its positional value, and then sum all the resulting products. For instance, $4706_8 &#x3D; (4 \times 8^3) + (7 \times 8^2) + (0 \times 8^1) + (6 \times 8^0) &#x3D; 2502_{10}$.  </li>
+<li><strong>Decimal to Another Base:</strong> The <strong>Division-Remainder Method</strong> is used. The decimal number is repeatedly divided by the new base, and the remainders are recorded from right to left to form the new number.  </li>
+<li><strong>Some Base to Another Base:</strong> This is a two-step method: first, convert the number from its original base to decimal (base 10), and second, convert the resulting decimal number to the target base.  </li>
+<li><strong>Shortcut Methods:</strong>  <ul>
+<li><strong>Binary to Octal:</strong> Group the binary digits into sets of three starting from the right, and then convert each group to its single-digit octal equivalent.  </li>
+<li><strong>Octal to Binary:</strong> Convert each octal digit to its 3-digit binary equivalent and then combine the binary groups.  </li>
+<li><strong>Binary to Hexadecimal:</strong> Group the binary digits into sets of four starting from the right, and convert each group to its single-digit hexadecimal equivalent.  </li>
+<li><strong>Hexadecimal to Binary:</strong> Convert each hexadecimal digit to its 4-digit binary equivalent and then combine the binary groups.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Math-and-Logic-Gates-Microprocessor"><a href="#Math-and-Logic-Gates-Microprocessor" class="headerlink" title="Math and Logic - Gates &amp; Microprocessor"></a><strong>Math and Logic - Gates &amp; Microprocessor</strong></h3><ul>
+<li><strong>AND, OR, NOT, NAND, NOR, XOR Gate</strong>  <ul>
+<li><strong>NOT Gate:</strong> An inverter that produces an output that is the opposite of its single input.  </li>
+<li><strong>AND Gate:</strong> Produces a 1 (high) output only when both of its inputs are 1.  </li>
+<li><strong>OR Gate:</strong> Produces a 1 output if either one or both of its inputs are 1.  </li>
+<li><strong>NAND Gate:</strong> (Not AND) Produces a high output unless both inputs are high.  </li>
+<li><strong>NOR Gate:</strong> (Neither…NOR) Produces a high output only if neither input A nor input B is high.  </li>
+<li><strong>XOR Gate:</strong> (Exclusive OR) Produces a high output if input A or input B is high, but not both.</li>
+</ul>
+</li>
+<li><strong>Truth Table</strong>  <ul>
+<li>A truth table is used to check the validity of algorithms, understand business rules, and design the logic for microchips. It provides an exhaustive list of all possible input combinations and their corresponding outputs for a given logic gate or circuit.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Set-Theory"><a href="#Set-Theory" class="headerlink" title="Set Theory"></a><strong>Set Theory</strong></h3><ul>
+<li><strong>Cardinal number of a set</strong>  <ul>
+<li>The cardinal number of a set is the number of elements contained within that set. For a set named X, this can be denoted as n(X) or |X|.</li>
+</ul>
+</li>
+<li><strong>Types of set</strong>  <ul>
+<li><strong>Empty Set:</strong> A set that contains no elements, written as {}.  </li>
+<li><strong>Singleton Set:</strong> A set that contains precisely one element.  </li>
+<li><strong>Finite Set:</strong> A set that has a limited and countable number of elements.  </li>
+<li><strong>Infinite Set:</strong> A set that has an uncountable number of elements.</li>
+</ul>
+</li>
+<li><strong>Venn diagram, union, intersection, symmetric difference</strong>  <ul>
+<li><strong>Venn Diagram:</strong> A pictorial representation of sets using overlapping circles to show the relationships between them.  </li>
+<li><strong>Intersection (A ∩ B):</strong> The set of elements that belong to both set A and set B.  </li>
+<li><strong>Union (A ∪ B):</strong> The set containing all elements that are in set A, set B, or both.  </li>
+<li><strong>Symmetric Difference (A Δ B):</strong> The set of elements that are in either of the sets, but not in their intersection.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Input-and-output-Secondary-storage"><a href="#Input-and-output-Secondary-storage" class="headerlink" title="Input and output &amp; Secondary storage"></a><strong>Input and output &amp; Secondary storage</strong></h3><ul>
+<li><strong>Basic idea about I&#x2F;O devices</strong>  <ul>
+<li><strong>Input Devices:</strong> These devices translate data into a form that the system unit can process. Keyboards and mice are common examples of input devices.  </li>
+<li><strong>Output Devices:</strong> These devices convert data from the computer into a form that humans can understand. The most common output devices are displays (monitors) and printers.  </li>
+<li><strong>Combination Input and Output Devices:</strong> These devices combine both input and output functionalities. Examples include headsets (microphone and headphones), multifunctional devices (like all-in-one printers), and virtual reality (VR) head-mounted displays and controllers.</li>
+</ul>
+</li>
+<li><strong>Basic idea about secondary storage</strong>  <ul>
+<li>Secondary storage is nonvolatile, meaning it holds data and programs even when the computer’s power is turned off. Its key characteristics include the media (physical material), capacity (how much it can hold), storage devices (the hardware that reads&#x2F;writes data), and access speed. Common types of secondary storage are hard disks, solid-state storage (including SSDs and USB drives), and optical discs (like CDs, DVDs, and Blu-ray).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Computer-language"><a href="#Computer-language" class="headerlink" title="Computer language"></a><strong>Computer language</strong></h3><ul>
+<li><strong>Different types of language and their advantage &amp; limitation</strong>  <ul>
+<li>Computer languages are broadly classified into three categories: machine language, assembly language, and high-level language.  </li>
+<li><strong>Machine Language:</strong>  <ul>
+<li><strong>Advantage:</strong> It can be executed very fast by the computer because it doesn’t require translation.  </li>
+<li><strong>Limitations:</strong> It is machine-dependent, difficult to program, prone to errors, and difficult to modify.</li>
+</ul>
+</li>
+<li><strong>Assembly Language:</strong>  <ul>
+<li><strong>Advantages:</strong> It is easier to understand, use, and modify than machine language, and it maintains the efficiency of machine language. It uses mnemonic codes (like ADD) instead of numeric codes.  </li>
+<li><strong>Limitations:</strong> It is machine-dependent, requires knowledge of the hardware, and involves machine-level coding.</li>
+</ul>
+</li>
+<li><strong>High-Level Language:</strong>  <ul>
+<li><strong>Advantages:</strong> These languages are machine-independent, easier to learn and use, result in fewer errors, have lower preparation costs, are better documented, and are easier to maintain. They use English words and familiar mathematical symbols.  </li>
+<li><strong>Limitations:</strong> They have lower execution efficiency compared to low-level languages and offer less flexibility to control the computer’s CPU and memory directly.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Compiler and interpreter</strong>  <ul>
+<li><strong>Compiler:</strong> A translator program that converts an entire high-level language program (source program) into its equivalent machine language program (object program). It checks for syntax errors during this process but is not involved in the program’s execution.  </li>
+<li><strong>Interpreter:</strong> A translator that takes one statement of a high-level language program at a time, translates it into machine language, and then immediately executes the resulting instructions.</li>
+</ul>
+</li>
+<li><strong>Syntax errors</strong>  <ul>
+<li>A syntax error is a violation of the rules of a programming language. Compilers automatically detect these errors, which can include the use of illegal characters, improper sequencing of instructions, or the use of undefined variable names. A program with syntax errors cannot be successfully translated.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Planning-the-computer-program"><a href="#Planning-the-computer-program" class="headerlink" title="Planning the computer program"></a><strong>Planning the computer program</strong></h3><ul>
+<li><strong>Algorithm</strong>  <ul>
+<li>An algorithm refers to the logic of a program and provides a step-by-step description of how to solve a given problem. To qualify as an algorithm, a sequence of instructions must be precise, unambiguous, and executable in a finite amount of time, ensuring it will eventually terminate and produce the desired result.</li>
+</ul>
+</li>
+<li><strong>Flowchart</strong>  <ul>
+<li>A flowchart is a pictorial or graphical representation of an algorithm. It uses standardized symbols (boxes of different shapes) to denote various types of instructions, and these boxes are connected by lines with arrows to show the sequence of execution.</li>
+</ul>
+</li>
+<li><strong>Program and programming</strong>  <ul>
+<li>A <strong>program</strong> is a list of instructions, written in a programming language, for a computer to follow to process data into information.  </li>
+<li><strong>Programming</strong>, also known as software development, is a problem-solving procedure that involves creating this list of instructions. It typically follows a six-step process called the software development life cycle.</li>
+</ul>
+</li>
+<li><strong>Software development life cycle (SDLC)</strong>  <ul>
+<li>The SDLC is a six-step process for creating software. The steps are:  <ol>
+<li>Program specification  </li>
+<li>Program design  </li>
+<li>Program code  </li>
+<li>Program test  </li>
+<li>Program documentation  </li>
+<li>Program maintenance</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a><strong>Networking</strong></h3><ul>
+<li><strong>Basic idea about network and how does it works</strong>  <ul>
+<li>A network is used to exchange data for purposes such as sharing, communication, organization, and entertainment. A network can be a <strong>client-server model</strong>, where client machines request services from a central server, or a <strong>peer-to-peer network</strong>, where computer nodes can act as both clients and servers without a central server.</li>
+</ul>
+</li>
+<li><strong>Request and response</strong>  <ul>
+<li>This is a model of communication used in client-server networks. A client machine sends a request for information or a service to a server. The server processes this request and sends a response back to the client.</li>
+</ul>
+</li>
+<li><strong>MAC, LAN, MAN, WAN, PAN, VPN, TCP&#x2F;IP, UDP, Multiplexing, IPv4, IPv6, subnetting</strong>  <ul>
+<li><strong>MAC (Media Access Control) address:</strong> A unique identifier assigned to a network adapter by its manufacturer, written as six octets in hexadecimal.  </li>
+<li><strong>LAN (Local Area Network):</strong> A group of PCs confined to a small geographic area, like a single building or floor.  </li>
+<li><strong>MAN (Metropolitan Area Network):</strong> A telecommunication network that connects several LANs in close proximity.  </li>
+<li><strong>WAN (Wide Area Network):</strong> A network that extends over large geographic areas, such as countries or continents.  </li>
+<li><strong>PAN (Personal Area Network):</strong> A network for integrating personal devices like smartphones and laptops for data exchange.  </li>
+<li><strong>VPN (Virtual Private Network):</strong> A virtual communication network that uses the infrastructure of a physical network, most commonly the internet, to logically connect computer systems.  </li>
+<li><strong>TCP&#x2F;IP (Transmission Control Protocol&#x2F;Internet Protocol):</strong> A communications protocol suite where IP works at OSI Layer 3 to get packets to their destination, and TCP works at Layer 4 to provide reliable, connection-oriented data transmission.  </li>
+<li><strong>UDP (User Datagram Protocol):</strong> An OSI Layer 4 protocol that is a “cut-down” version of TCP. It is connectionless and does not guarantee delivery, making it faster but less reliable, suitable for real-time applications.  </li>
+<li><strong>Multiplexing:</strong> A technique that combines multiple signals into a single transmission channel to enable efficient sharing of a communication medium.  </li>
+<li><strong>IPv4:</strong> Internet Protocol version 4, the most frequently used communications protocol, which uses a 32-bit address system.  </li>
+<li><strong>IPv6:</strong> The new generation of IP addressing, which uses a 128-bit system to overcome the address space limitations of IPv4.  </li>
+<li><strong>Subnetting:</strong> The subdivision of a logical IP network into multiple smaller networks by modifying the default subnet mask.</li>
+</ul>
+</li>
+<li><strong>Nodes, repeaters, hubs, bridges, switch, port, firewalls</strong>  <ul>
+<li><strong>Nodes:</strong> Computers or other intelligent devices with MAC addresses that can send and receive messages.  </li>
+<li><strong>Repeaters:</strong> Devices that boost weak digital signals to extend their range.  </li>
+<li><strong>Hubs:</strong> Central connecting devices that connect hosts and broadcast any received data to all other connected hosts.  </li>
+<li><strong>Bridges:</strong> Two-port devices used to create subnets that can process and filter data.  </li>
+<li><strong>Switch:</strong> A multiport device similar to a hub, but it forwards messages to a specific port based on the destination MAC address.  </li>
+<li><strong>Port Numbers:</strong> 16-bit unsigned integers (0-65535) that operate at the transport layer to identify different applications or services running on a computer.  </li>
+<li><strong>Firewalls:</strong> Devices that use software to control services and convert between protocols, often incorporated into routers to block unwanted network connections. They act as a security buffer between a private network and external networks.</li>
+</ul>
+</li>
+<li><strong>Network topologies</strong>  <ul>
+<li>A network’s topology refers to the physical or logical arrangement of its nodes. Common topologies include:  <ul>
+<li><strong>Star:</strong> Hosts are connected to a central connecting device like a hub or switch.  </li>
+<li><strong>Bus:</strong> All nodes are connected in a line to a single cable.  </li>
+<li><strong>Ring:</strong> Messages are passed from computer to computer in a logical ring.  </li>
+<li><strong>Mesh:</strong> Each node is connected to other nodes, allowing it to send, receive, and relay data.  </li>
+<li><strong>Tree &amp; Hybrid:</strong> Other topologies that combine aspects of the basic types.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>How find links for nodes</strong>  <ul>
+<li>To find the number of links required for a full mesh topology with ‘n’ nodes, you can use the formula: <strong>n(n - 1) &#x2F; 2</strong>. For example, a network with 6 nodes would require 6(6-1)&#x2F;2 &#x3D; 15 links.</li>
+</ul>
+</li>
+<li><strong>OSI reference model</strong>  <ul>
+<li>The Open Systems Interconnection (OSI) model is a 7-layer framework used to define how data communication occurs on computer networks. Each layer provides services to the layers above and below it. The layers are: 7. Application, 6. Presentation, 5. Session, 4. Transport, 3. Network, 2. Data Link, and 1. Physical.</li>
+</ul>
+</li>
+<li><strong>Protocol by layer</strong>  <ul>
+<li>Different protocols operate at each layer of the OSI model. For example:  <ul>
+<li><strong>Layer 7 (Application):</strong> SMTP, FTP, Telnet.  </li>
+<li><strong>Layer 4 (Transport):</strong> TCP, UDP.  </li>
+<li><strong>Layer 3 (Network):</strong> IP, IPv4, IPv6, Routers.  </li>
+<li><strong>Layer 2 (Data Link):</strong> Switches, Bridges, MAC addresses, Frames.  </li>
+<li><strong>Layer 1 (Physical):</strong> Hubs, Cables, Bits.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Packet switching</strong>  <ul>
+<li>Packet switching is a communication method where data is broken down into smaller units called packets. Each packet contains source and destination addresses and is transmitted over the network, potentially taking different paths to reach the destination where they are reassembled.</li>
+</ul>
+</li>
+<li><strong>Class of IP (A-E) and range</strong>  <ul>
+<li>The IPv4 classification system is known as the classful network architecture, which divides IP addresses into five classes. Classes A, B, and C are commonly used for network hosts.  <ul>
+<li><strong>Class A:</strong> Range 0-127 for the first octet. Default subnet mask 255.0.0.0.  </li>
+<li><strong>Class B:</strong> Range 128-191 for the first octet. Default subnet mask 255.255.0.0.  </li>
+<li><strong>Class C:</strong> Range 192-223 for the first octet. Default subnet mask 255.255.255.0.  </li>
+<li><strong>Class D:</strong> Range 224-239, used for multicasting.  </li>
+<li><strong>Class E:</strong> Range 240-255, was reserved for future use.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Privacy-security-and-ethics"><a href="#Privacy-security-and-ethics" class="headerlink" title="Privacy, security and ethics"></a><strong>Privacy, security and ethics</strong></h3><ul>
+<li><strong>Authentication and authorization</strong>  <ul>
+<li><strong>Authentication</strong> is the process of ensuring the integrity and identity of a user. Methods include passwords and biometric scanning (fingerprints, iris scans).  </li>
+<li><strong>Authorization</strong> is not explicitly defined in the documents but is related to <strong>restricting access</strong>, which involves limiting access to authorized persons.</li>
+</ul>
+</li>
+<li><strong>Define privacy and discuss the impact of large databases, private networks, the Internet, and the Web.</strong>  <ul>
+<li><strong>Privacy</strong> concerns the collection and use of data about individuals. Key concerns include accuracy, property (who owns the data), and access.  </li>
+<li><strong>Impact of Large Databases:</strong> Large organizations compile information about individuals, creating “Big Data”. Information resellers collect and sell this personal data, creating electronic profiles. This raises issues like the collection of public but personally identifying information, the spread of information without consent (which can lead to identity theft), and the spread of inaccurate data.  </li>
+<li><strong>Impact of Private Networks:</strong> Employers can use employee-monitoring software to monitor emails legally, which is a significant privacy concern.  </li>
+<li><strong>Impact of the Internet and the Web:</strong> People often have an “illusion of anonymity” online. When browsing, information is stored in history files, temporary internet files (browser cache), and cookies. Tracking cookies and spyware can monitor internet activities, and computer monitoring software like keystroke loggers are the most invasive threats.</li>
+</ul>
+</li>
+<li><strong>identity and the major privacy laws</strong>  <ul>
+<li><strong>Online Identity</strong> is the information that people voluntarily post about themselves online. This information can be archived and made available indefinitely through search features.  </li>
+<li><strong>Major Privacy Laws:</strong>  <ul>
+<li><strong>Gramm-Leach-Bliley Act:</strong> Protects personal financial information.  </li>
+<li><strong>Health Insurance Portability and Accountability Act (HIPAA):</strong> Protects medical records.  </li>
+<li><strong>Family Educational Rights and Privacy Act (FERPA):</strong> Restricts the disclosure of educational records.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>malicious software, and malicious hardware including identity theft, Internet scams, data manipulations, ransomware, DoS attacks, viruses, worms, Trojan horses, zombies</strong>  <ul>
+<li><strong>Identity Theft:</strong> The illegal assumption of a person’s identity for economic gain.  </li>
+<li><strong>Internet Scams:</strong> Scams conducted over the Internet, such as phishing, which uses fake but official-looking communications to trick people into giving up sensitive data.  </li>
+<li><strong>Data Manipulation:</strong> Unauthorized access to a computer network to copy files to or from a server.  </li>
+<li><strong>Ransomware:</strong> Malicious software that encrypts a computer’s data and demands a ransom for the password to decrypt it.  </li>
+<li><strong>DoS (Denial of Service) Attacks:</strong> Attempts to slow down or stop a computer system by flooding it with requests for information and data.  </li>
+<li><strong>Malicious Software (Malware):</strong>  <ul>
+<li><strong>Viruses:</strong> Migrate through networks and attach themselves to different programs.  </li>
+<li><strong>Worms:</strong> Fill a computer with self-replicating information to overwhelm it.  </li>
+<li><strong>Trojan Horse:</strong> Programs disguised as something else that are actually malicious.</li>
+</ul>
+</li>
+<li><strong>Malicious Hardware:</strong>  <ul>
+<li><strong>Zombies:</strong> Computers that have been infected by a virus, worm, or Trojan horse and can be controlled remotely. A collection of zombies is a <strong>botnet</strong>.  </li>
+<li><strong>Rogue Wi-Fi Hotspots:</strong> Fake Wi-Fi networks that imitate legitimate ones to capture any data that passes through them.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/06/07/IT-Systems-Fundamentals/">IT Systems Fundamentals</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© JulianZBY | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
