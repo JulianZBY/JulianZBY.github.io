@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="JulianZBY">
+
+
+
+
+
+<title>中国近代史纲要期末复习笔记 | Julian&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Julian&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Julian&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/categories">Categories</a>
+                
+                <a class="menu-item" href="/tags">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">中国近代史纲要期末复习笔记</h1>
+            
+                <div class="post-meta">
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 12, 2025&nbsp;&nbsp;23:05:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="第二讲-中国是怎么进入近代社会的？"><a href="#第二讲-中国是怎么进入近代社会的？" class="headerlink" title="第二讲 中国是怎么进入近代社会的？"></a>第二讲 中国是怎么进入近代社会的？</h1><h2 id="一、中国封建社会是怎么走向衰败的？"><a href="#一、中国封建社会是怎么走向衰败的？" class="headerlink" title="一、中国封建社会是怎么走向衰败的？"></a>一、中国封建社会是怎么走向衰败的？</h2><h3 id="（一）第一个历史落差，中国领先世界——西方望尘莫及"><a href="#（一）第一个历史落差，中国领先世界——西方望尘莫及" class="headerlink" title="（一）第一个历史落差，中国领先世界——西方望尘莫及"></a>（一）第一个历史落差，中国领先世界——西方望尘莫及</h3><p>中国有着悠久的历史与文明，在世界四大文明古国里，中华文明是唯一延续时间漫长、未曾中断的文化系统。中华文明尽管历尽沧桑，却始终绵延发展，传承不绝，展现出强大的生命力，体现了中华民族的凝聚力和自强不息的民族精神。</p>
+<p>中国封建社会曾经创造了灿烂的文明，人类科学史上第一次生产力发展的高峰，就是发生在中国，尤其是中国古代四大发明指南针、火药、造纸术和活字印刷术传入西方后，起了开世界近代文明先河的伟大作用。</p>
+<h3 id="（二）第二个历史落差——近代欧洲的崛起和中国社会的衰败"><a href="#（二）第二个历史落差——近代欧洲的崛起和中国社会的衰败" class="headerlink" title="（二）第二个历史落差——近代欧洲的崛起和中国社会的衰败"></a>（二）第二个历史落差——近代欧洲的崛起和中国社会的衰败</h3><p>17世纪下半叶至18世纪，经过清康熙、雍正、乾隆的鼎盛时期，中国封建社会开始走到了末世。正是在这一时期，中西历史走向产生了巨大的反差，在乾隆中后期以后，中国封建生产力迅速衰减，在嘉庆、道光年间已是危机四伏，存在着土地高度集中、人口急剧膨胀、财政极度匮乏、吏治极端腐败、军备严重废弛、社会危机重重等一系列问题，几乎在同一时间，欧美国家先后确立资本主义制度，开展工业革命，迅速崛起。</p>
+<h3 id="（三）中国为什么不能正常地发展到资本主义？（中国封建社会走向衰败的原因）"><a href="#（三）中国为什么不能正常地发展到资本主义？（中国封建社会走向衰败的原因）" class="headerlink" title="（三）中国为什么不能正常地发展到资本主义？（中国封建社会走向衰败的原因）"></a>（三）中国为什么不能正常地发展到资本主义？（中国封建社会走向衰败的原因）</h3><h4 id="1-高度集权的君主专制统治抑制了中国封建社会的生机和活力"><a href="#1-高度集权的君主专制统治抑制了中国封建社会的生机和活力" class="headerlink" title="1. 高度集权的君主专制统治抑制了中国封建社会的生机和活力"></a>1. 高度集权的君主专制统治抑制了中国封建社会的生机和活力</h4><p>中国历代封建统治者不断强化专制集权体制，而且中国的封建体制比欧洲成熟而又稳定得多，对中国封建社会的控制更为强大而有效，宗法制度深入到基层乡村和家庭，进一步补充了封建政权控制力，这在很大程度上制约了中国封建社会内部的生机和活力，制约了封建社会后期资本主义的萌芽和发展。 </p>
+<h4 id="2-自给自足的小农经济和重农抑商政策束缚、限制生产力的进一步发展"><a href="#2-自给自足的小农经济和重农抑商政策束缚、限制生产力的进一步发展" class="headerlink" title="2. 自给自足的小农经济和重农抑商政策束缚、限制生产力的进一步发展"></a>2. 自给自足的小农经济和重农抑商政策束缚、限制生产力的进一步发展</h4><p>中国以地主制经济为基础的经济制度束缚工商业的发展，农业与家庭手工业相结合的小农经济占绝对优势，这样的社会里男耕女织，自给自足，在精神上缺少对改进或改革技术的刺激，物质上也无力支持各种技术改革的实行。<br>同时，受重农抑商政策的影响，许多商人看到进行商业活动不如进行封建性的剥削更为有利和可靠，因此在积累到一定财富时，就转向在农村购买土地。由于工商业不能得到顺利的发展，从物质生产方面不可能向科学技术提出新的要求。 </p>
+<h4 id="3-思想文化的专制统治限制了人们思想的自由和解放"><a href="#3-思想文化的专制统治限制了人们思想的自由和解放" class="headerlink" title="3. 思想文化的专制统治限制了人们思想的自由和解放"></a>3. 思想文化的专制统治限制了人们思想的自由和解放</h4><p>中国封建社会儒家思想文化受到异乎寻常的推崇，一种思想一统天下不利于科学的发展，且儒家思想本身又形成了一种内向的、稳定的、隔绝的文化机制，拒斥外来的信息和刺激。到了明朝以后，程朱理学在被捧为官方意识形态，“封建礼教”的思想被前所未有地普及和灌输到基层社会和民间，扼杀了中国人民的思维发展。尤其到清朝，文化专制主义空前严厉，使政治层面和思想文化领域的近代化因素难以发育。 </p>
+<h4 id="4-僵化的教育和科举考试制度束缚了人才的培养"><a href="#4-僵化的教育和科举考试制度束缚了人才的培养" class="headerlink" title="4. 僵化的教育和科举考试制度束缚了人才的培养"></a>4. 僵化的教育和科举考试制度束缚了人才的培养</h4><p>中国封建社会后期，教育体制和科学制度越来越僵化，大大束缚了人们的思想，阻碍了科学技术的进一步发展，由于封建教育排斥科举学术的内容，又由于官方尊儒的价值导向，使广大士子唯以功名为尚，把主要精力与智慧放到皓首穷经，而对于与“功名”无关的科学技术则不屑闻问，这样中国便缺乏科技知识分子队伍，极大地影响了古科技的发展。<br>中国古代注重实用性的科学传统，使得中国人在较为经验的、直观的、单一的科学技术得以作出巨大的贡献，却发展不出纯逻辑、理论数学以及建基于其上的分门别类的近代自然科学，造成了中国古代科技难以产生革命性的飞跃。 </p>
+<h4 id="5-闭关锁国政策阻碍了社会的发展和进步"><a href="#5-闭关锁国政策阻碍了社会的发展和进步" class="headerlink" title="5. 闭关锁国政策阻碍了社会的发展和进步"></a>5. 闭关锁国政策阻碍了社会的发展和进步</h4><p>明清之际的闭关政策表面上暂时阻滞了资本主义对中国的侵略，但它严重地阻碍了中国国内资本主义萌芽的成长，阻碍了中国对外交流，限制了中国自己的目光和思想，助长了清朝统治者“华夷观念”和“天朝上国”观念，助长了清朝统治者的消极保守、力图维持现状的惰性心理。<br>闭关锁国政策主要内容有：<br>（1）“一口通商”：1759年留广州一口通商<br>（2）“公行制度”：广州十三行<br>（3）“防夷” “限夷”措施</p>
+<h2 id="二、中国是怎么“被拖入”近代社会的？"><a href="#二、中国是怎么“被拖入”近代社会的？" class="headerlink" title="二、中国是怎么“被拖入”近代社会的？"></a>二、中国是怎么“被拖入”近代社会的？</h2><h3 id="（一）西方的殖民扩张"><a href="#（一）西方的殖民扩张" class="headerlink" title="（一）西方的殖民扩张"></a>（一）西方的殖民扩张</h3><p>西方资本主义国家对外推行殖民政策，从15-16世纪开始，西方新兴的资产阶级，开始对非洲、美洲和亚洲进行海盗式的殖民掠夺。到19世纪中叶，由于工业革命的广泛开展，世界资本主义处在更大规模的上升时期，欧美强国为了扩大商品市场，争夺原料产地，殖民侵略活动日益加紧，地大物博久为殖民主义者所垂涎的中国面临着被打开门户的严峻形势。 </p>
+<p>西方国家先后到达中国沿海： </p>
+<ul>
+<li>葡萄牙，1514年</li>
+<li>西班牙，1575年 </li>
+<li>荷兰，1601年 </li>
+<li>英国，1637年 </li>
+<li>法国，1698年 </li>
+<li>美国，1784年</li>
+</ul>
+<h3 id="（二）英国打开中国大门"><a href="#（二）英国打开中国大门" class="headerlink" title="（二）英国打开中国大门"></a>（二）英国打开中国大门</h3><h4 id="1-贸易"><a href="#1-贸易" class="headerlink" title="1. 贸易"></a>1. 贸易</h4><p>清朝沿用明制，实行朝贡制度，传统的朝贡体制下，随朝贡使同来的，还有贸易团体。西方国家并非中国藩国，派使者来华，也不是要称臣朝贡，但清朝的统治者却将他们视为朝贡。<br>中英贸易主要是东印度公司与广州十三行进行垄断贸易。东印度公司以外的散商，即港脚商人，经营灵活、有效率，势力增长快。至1834年中英贸易出现转折，英国政府取消东印度公司对华贸易和茶叶贸易的垄断权，开始委派有官方身份的“商务监督”来华，试图与清政府直接打交道。 </p>
+<p>英国在对华贸易上存在的问题：</p>
+<ul>
+<li>英国严重入超</li>
+<li>贸易渠道受限 </li>
+<li>茶叶贸易占重要地位 </li>
+<li>对中国市场的期盼</li>
+<li>赋税等成本</li>
+<li>英国的散商，包括鸦片贩子，强烈要求取消广州十三行的贸易垄断权</li>
+</ul>
+<h4 id="2-外交"><a href="#2-外交" class="headerlink" title="2. 外交"></a>2. 外交</h4><ul>
+<li><strong>马戛尔尼使团</strong><br>1793年，马戛尔尼使团访华，发生“礼仪之争”<br>提出增开通商口岸、在珠山或广州附近划割小岛供英国商人使用、免税或减税、自由传教等要求。英国在要求双方贸易的同时，也掩藏这殖民扩张的野心，其要求均被乾隆帝和清政府拒绝。<br>马戛尔尼访华的目的不是为了平等友好交往、互通有无，而是带着极强的殖民主义色彩。</li>
+<li><strong>阿美士德使团</strong><br>1816年，阿美士德使团来华，原来计划向清廷提出自由贸易、扩大口岸、驻使北京、保护英国在华权益等要求。又因“礼仪之争”，被遣送回国，英国的殖民诉求没有得到满足。</li>
+<li><strong>“劳律卑事件”</strong><br>1837年7月，驻华商务监督劳律卑试图绕过行商而直接与两广总督打交道，与中国水师发生冲突，中英贸易受此影响，曾短暂中断。</li>
+</ul>
+<h4 id="3-鸦片"><a href="#3-鸦片" class="headerlink" title="3. 鸦片"></a>3. 鸦片</h4><p>从18世纪初开始，英国通过向中国走私鸦片，改变对华贸易中长期入超的状况。走私鸦片数量大幅增加，给中国造成巨大危害。</p>
+<p><strong>鸦片贸易的危害</strong><br>（1）腐蚀清政府官僚体系，吏治更加腐败，军队失去战斗力，社会风气更加堕落。<br>（2）造成了中国的白银大量外流和财政经济危机。<br>（3）导致银贵钱贱，加重了劳动人民的负担。<br>（4）直接毒害了中国人的身体和精神。<br>1839年3月到达广州，以缴烟和具结为方策主持禁烟。<br>1839年6月，在虎门海滩当众销毁鸦片，总共历时23天。 </p>
+<h4 id="4-武力"><a href="#4-武力" class="headerlink" title="4. 武力"></a>4. 武力</h4><p>英国以维护罪恶的鸦片贸易为借口，悍然发动了侵略战争。 </p>
+<h3 id="（三）鸦片战争：开启中国近代史"><a href="#（三）鸦片战争：开启中国近代史" class="headerlink" title="（三）鸦片战争：开启中国近代史"></a>（三）鸦片战争：开启中国近代史</h3><h4 id="1-鸦片战争的背景"><a href="#1-鸦片战争的背景" class="headerlink" title="1. 鸦片战争的背景"></a>1. 鸦片战争的背景</h4><ul>
+<li>工业革命后需要扩大海外市场</li>
+<li>谋求改变对华贸易长期入超状态 </li>
+<li>为了摆脱经济危机和转移国内人民的视线</li>
+<li>成为世界资本主义最强大的国家，建立了号称“日不落”的殖民大帝国。在亚洲，继占领印度等地后，中国成为它主要的侵略目标。</li>
+</ul>
+<h4 id="2-鸦片战争的结果"><a href="#2-鸦片战争的结果" class="headerlink" title="2. 鸦片战争的结果"></a>2. 鸦片战争的结果</h4><p>鸦片战争以清政府失败而告终。1842年8月29日，清政府与英国签订中国近代史上第一个不平等条约。随后，列强纷至沓来，逼迫清政府与之签订不平等条约：</p>
+<ul>
+<li>1842.08，中英《南京条约》</li>
+<li>1843.10，中英《虎门条约》</li>
+<li>1844.07，中美《望厦条约》</li>
+<li>1844.10，中法《黄埔条约》</li>
+</ul>
+<p>通过一系列不平等条约和其他方式，西方列强在中国攫取大量特权和利益。<br>鸦片战争以后，中国社会发生两个根本变化，一是独立的中国逐步变成半殖民地的中国，二是封建的中国逐步变成半封建的中国。逐渐形成了一种属于资本主义世界体系的畸形社会形态。</p>
+<h2 id="三、教训与启示"><a href="#三、教训与启示" class="headerlink" title="三、教训与启示"></a>三、教训与启示</h2><h3 id="（一）教训"><a href="#（一）教训" class="headerlink" title="（一）教训"></a>（一）教训</h3><ul>
+<li>腐朽造成封闭</li>
+<li>封闭导致落后</li>
+<li>落后就要挨打</li>
+</ul>
+<h3 id="（二）启示"><a href="#（二）启示" class="headerlink" title="（二）启示"></a>（二）启示</h3><p>发展是硬道理</p>
+<h4 id="1-科技水平是决定国家竞争力的关键因素。"><a href="#1-科技水平是决定国家竞争力的关键因素。" class="headerlink" title="1. 科技水平是决定国家竞争力的关键因素。"></a>1. 科技水平是决定国家竞争力的关键因素。</h4><p>康乾时期的历史经验表明，决定国家综合竞争力的关键因素并不是经济总量的高低、人口的多寡，而是科技水平的高低。从长远来看，鼓励科技进步与自主创新对实现我国经济社会的可持续发展意义重大。对外开放是实现经济快速发展的客观需要</p>
+<h4 id="2-对外开放是实现经济快速发展的客观需要。"><a href="#2-对外开放是实现经济快速发展的客观需要。" class="headerlink" title="2. 对外开放是实现经济快速发展的客观需要。"></a>2. 对外开放是实现经济快速发展的客观需要。</h4><p>在欧洲工业革命爆发之际，清政府却选择闭关锁国的政策，限制与世界的经贸往来，把中国与世界隔绝起来，使得西方的先进思想与技术无法传播到中国。康乾时期的历史经验表明，中国的发展离不开世界。经济全球化是当今世界发展的必然趋势，四十多年的改革开放已经使中国成为经济全球化的受益者之一。为实现我国经济持续、快速发展，必须实行对外开放，而且开放不仅限于经济领域，科技、资源、教育、文化等领域的开放同样重要。</p>
+<h4 id="3-制度创新是经济发展的重要保障。"><a href="#3-制度创新是经济发展的重要保障。" class="headerlink" title="3. 制度创新是经济发展的重要保障。"></a>3. 制度创新是经济发展的重要保障。</h4><p>有什么样的制度，就有什么样的经济行为。当制度变革适合经济发展要求时，其对经济增长具有促进作用；反之，也有可能出现制度供给滞后或不足的现象，从而抑制经济的发展。康乾时期清政府所采取的闭关锁国、禁锢思想以及轻视科学制度，对先进的科技和生产方式极力排斥，使得西方国家的工业革命并没有对我国产生多大影响，也使得我国与西方国家的差距越拉越大。</p>
+<hr>
+<h1 id="第八讲-为什么说没有共产党就没有新中国"><a href="#第八讲-为什么说没有共产党就没有新中国" class="headerlink" title="第八讲 为什么说没有共产党就没有新中国"></a>第八讲 为什么说没有共产党就没有新中国</h1><h2 id="一、中国共产党争取和平民主的努力"><a href="#一、中国共产党争取和平民主的努力" class="headerlink" title="一、中国共产党争取和平民主的努力"></a>一、中国共产党争取和平民主的努力</h2><h3 id="（一）抗战胜利以后的时局"><a href="#（一）抗战胜利以后的时局" class="headerlink" title="（一）抗战胜利以后的时局"></a>（一）抗战胜利以后的时局</h3><p>抗战胜利之初，中国的政治格局在整体上呈现出“三国五方”相互影响的局面。</p>
+<p>国际上，美苏两国对华政策深刻影响中国战后政局走向。国内，国共两党的政争决定中国之命运，国民党居主导地位，中国共产党处于明显弱势，中间势力一时勃兴，成为战后中国政局发展变化的重要因素。</p>
+<h4 id="1-三种政治力量，三种建国方案"><a href="#1-三种政治力量，三种建国方案" class="headerlink" title="1. 三种政治力量，三种建国方案"></a>1. 三种政治力量，三种建国方案</h4><table>
+<thead>
+<tr>
+<th>政治力量</th>
+<th>基础阶级</th>
+<th>建国方案</th>
+<th>前途</th>
+<th>结局</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>国民党</td>
+<td>大地主资产阶级</td>
+<td>地主买办阶级的专政</td>
+<td>半殖民地半封建的老路</td>
+<td>失败</td>
+</tr>
+<tr>
+<td>民主党派和中间人士</td>
+<td>民族资产阶级</td>
+<td>资产阶级共和国</td>
+<td>资本主义</td>
+<td>破灭</td>
+</tr>
+<tr>
+<td>中国共产党</td>
+<td>工人、农民、小资产阶级</td>
+<td>工人阶级领导的、工农联盟为基础的人民共和国</td>
+<td>经新民主主义走向社会主义</td>
+<td>成功</td>
+</tr>
+</tbody></table>
+<p>中间势力主张的资本主义方案基本不具备现实可行性，实质上是国共两党所代表的两个中国之命运的抉择，交织出抗战胜利之初中国错综复杂的政治格局。</p>
+<h4 id="2-美苏对华政策"><a href="#2-美苏对华政策" class="headerlink" title="2. 美苏对华政策"></a>2. 美苏对华政策</h4><p>① <strong>美国对华政策</strong></p>
+<ul>
+<li>长期目标：建立一个统一的亲美政府。</li>
+<li>短期目标：“避免共产党完全控制中国”。</li>
+<li>采取的主要方法：<ul>
+<li>要求国民党政府实行某种程度的改革。</li>
+<li>通过给予经济、政治、军备等方面的援助。</li>
+</ul>
+</li>
+</ul>
+<p>② <strong>苏联对华政策</strong></p>
+<ul>
+<li>签订《中苏友好同盟条约》，在外交上只承认国民党政府。</li>
+<li>对中国共产党及其领导的人民革命力量给予了一定的支持。</li>
+</ul>
+<h4 id="3-战后中国时局的重要特点"><a href="#3-战后中国时局的重要特点" class="headerlink" title="3. 战后中国时局的重要特点"></a>3. 战后中国时局的重要特点</h4><p>① <strong>内战的危险</strong></p>
+<ul>
+<li>蒋介石准备发动内战。</li>
+</ul>
+<p>② <strong>和平的可能</strong></p>
+<ul>
+<li>广大人民热切希望和平民主。</li>
+<li>共产党领导的人民力量增长。</li>
+<li>中间势力主张“和平建国”。</li>
+<li>国民党需要时间部署内战。</li>
+<li>美苏政策对华政策的两面性。</li>
+</ul>
+<h3 id="（二）共产党争取和平民主的努力"><a href="#（二）共产党争取和平民主的努力" class="headerlink" title="（二）共产党争取和平民主的努力"></a>（二）共产党争取和平民主的努力</h3><h4 id="1-蒋介石力邀毛泽东重庆和谈"><a href="#1-蒋介石力邀毛泽东重庆和谈" class="headerlink" title="1. 蒋介石力邀毛泽东重庆和谈"></a>1. 蒋介石力邀毛泽东重庆和谈</h4><ul>
+<li><p>蒋介石三次电邀毛泽东重庆谈判的原因：</p>
+<ul>
+<li><strong>根本原因</strong>：中国共产党和解放区力量的强大。</li>
+<li><strong>客观原因</strong>：国民党方面准备不足。</li>
+<li><strong>国际因素</strong>：美苏希望政治解决国共问题。</li>
+<li><strong>主观原因</strong>：蒋介石的“假和平、真内战”策略。</li>
+</ul>
+</li>
+<li><p>重庆谈判国共双方的目的：</p>
+<ul>
+<li>蒋介石的目的：<ul>
+<li>敷衍国内外舆论，掩盖内战阴谋。</li>
+<li>诱使中国共产党交出军队和解放区政权，不战而控制全中国。</li>
+<li>如果谈判不成，把战争的责任转嫁给中共。</li>
+</ul>
+</li>
+<li>毛泽东的意图：<ul>
+<li>显示中国共产党和平民主的诚意。</li>
+<li>尽一切可能争取实现国内和平。</li>
+<li>即使谈判破裂，也可以教育人民，放弃对国民党的幻想。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-重庆谈判"><a href="#2-重庆谈判" class="headerlink" title="2. 重庆谈判"></a>2. 重庆谈判</h4><ul>
+<li>为了争取和平民主，毛泽东不顾个人安危，于1945年8月28日，携周恩来、王若飞赴重庆与国民党进行谈判。</li>
+<li>1945年10月10日，国共双方签订《政府与中共代表会谈纪要》，即《双十协定》。</li>
+<li><strong>谈判的主要成果</strong>：<ul>
+<li>确认和平建国的基本方针。</li>
+<li>确定召开政治协商会议，共商和平建国大计。</li>
+<li>结束国民党的“训政”，实现政治民主化。</li>
+<li>党派平等合法化。</li>
+<li>释放政治犯。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-政治协商会议"><a href="#3-政治协商会议" class="headerlink" title="3. 政治协商会议"></a>3. 政治协商会议</h4><ul>
+<li><p>1946年1月10日国共双方下达停战令，同日政治协商会议在重庆召开。</p>
+</li>
+<li><p>政协会议最后通过五项协议：</p>
+<ul>
+<li>政府组织案。</li>
+<li>国民大会案。</li>
+<li>和平建国纲领。</li>
+<li>军事问题案。</li>
+<li>宪法草案。</li>
+</ul>
+</li>
+<li><p>共产党决心严格履行政协协议，而国民党以扩大内战的行动，使政协协议成为一纸空文。</p>
+</li>
+</ul>
+<h2 id="二、国民党政权为什么迅速崩溃？"><a href="#二、国民党政权为什么迅速崩溃？" class="headerlink" title="二、国民党政权为什么迅速崩溃？"></a>二、国民党政权为什么迅速崩溃？</h2><ul>
+<li><strong>直接原因</strong>：战场上的溃败。</li>
+<li><strong>根本原因</strong>：国民党的阶级属性和反人民立场，导致民心丧失。体现在：<ul>
+<li>坚持内战，违背民意。</li>
+<li>坚持独裁，拒绝改革。</li>
+<li>党纪废弛，贪腐成风。</li>
+<li>出卖主权，祸国殃民。</li>
+<li>经济凋敝，民不聊生。</li>
+</ul>
+</li>
+</ul>
+<p>说明失民心者失天下，陷入全民包围之中。</p>
+<h2 id="三、共产党为什么能赢得政权？（为什么人民解放战争能如此迅速地取得胜利？）"><a href="#三、共产党为什么能赢得政权？（为什么人民解放战争能如此迅速地取得胜利？）" class="headerlink" title="三、共产党为什么能赢得政权？（为什么人民解放战争能如此迅速地取得胜利？）"></a>三、共产党为什么能赢得政权？（为什么人民解放战争能如此迅速地取得胜利？）</h2><h3 id="观点分析：“国民党腐败无能是自己倒下去的，共产党是躺赢”？"><a href="#观点分析：“国民党腐败无能是自己倒下去的，共产党是躺赢”？" class="headerlink" title="观点分析：“国民党腐败无能是自己倒下去的，共产党是躺赢”？"></a>观点分析：“国民党腐败无能是自己倒下去的，共产党是躺赢”？</h3><p><strong>错误观点</strong></p>
+<blockquote>
+<p>“现在敌人已经彻底孤立了。但是，敌人的孤立并不就等于我们的胜利。”“如果我们政策不正确……那就还是不能胜利，共产党会由越来越多变成越来越少，蒋介石的孤立会变成国共两方面都孤立，人民不喜欢蒋介石，也不喜欢共产党。这个可能是有的。”<br>——《毛泽东文集》(第5卷)，人民出版社1996年版，第23页。</p>
+</blockquote>
+<h3 id="共产党胜利的根本原因"><a href="#共产党胜利的根本原因" class="headerlink" title="共产党胜利的根本原因"></a>共产党胜利的根本原因</h3><h4 id="1-强大的军事斗争能力，彻底打垮国民党"><a href="#1-强大的军事斗争能力，彻底打垮国民党" class="headerlink" title="1. 强大的军事斗争能力，彻底打垮国民党"></a>1. 强大的军事斗争能力，彻底打垮国民党</h4><ul>
+<li>人民战争的战略战术，新型人民军队建设，打造了一支敢打必胜的坚强铁军，汇成了强大的军事斗争能力。</li>
+</ul>
+<h4 id="2-强大的政治领导能力，团结了最广泛的阶层"><a href="#2-强大的政治领导能力，团结了最广泛的阶层" class="headerlink" title="2. 强大的政治领导能力，团结了最广泛的阶层"></a>2. 强大的政治领导能力，团结了最广泛的阶层</h4><ul>
+<li>实现了对农民阶级、城市小资产阶级、民族资产阶级等的领导，可谓民心所向、众望所归。</li>
+</ul>
+<h4 id="3-强大的群众动员能力，汇聚了最广大的民心民力"><a href="#3-强大的群众动员能力，汇聚了最广大的民心民力" class="headerlink" title="3. 强大的群众动员能力，汇聚了最广大的民心民力"></a>3. 强大的群众动员能力，汇聚了最广大的民心民力</h4><ul>
+<li>战争中中共强大的动员力和民众的有力支持。</li>
+<li>习近平曾说：“淮海战役的胜利是靠老百姓用小车推出来的，渡江战役的胜利是靠老百姓用小船划出来的。”</li>
+</ul>
+<h4 id="4-强大的自我革新能力，赢得了人民群众的衷心拥护"><a href="#4-强大的自我革新能力，赢得了人民群众的衷心拥护" class="headerlink" title="4. 强大的自我革新能力，赢得了人民群众的衷心拥护"></a>4. 强大的自我革新能力，赢得了人民群众的衷心拥护</h4><ul>
+<li>党的自我革命是赢得广大人民拥护的关键，是赢得中国革命胜利的保证。</li>
+</ul>
+<p><strong>具体表现</strong>：</p>
+<ul>
+<li><strong>风清气正</strong>：党员都能够严格要求自己，发扬艰苦奋斗的精神，极少有贪腐行为，与国民党形成强烈对比。</li>
+<li><strong>纪律严明</strong>：在新解放区遵守入城守则，秋毫无犯，赢得人民的好感（以上海解放为例）。</li>
+<li><strong>进驻北京有赶考意识</strong>：<ul>
+<li>1949年3月，毛泽东在西柏坡召开的七届二中全会上向全党发出警告：<ul>
+<li>要求全党在胜利面前要保持清醒头脑。</li>
+<li>在夺取全国政权后要经受执政的考验。</li>
+<li>提出“两个务必”：<ul>
+<li>务必使同志们继续地保持谦虚、谨慎、不骄、不躁的作风。</li>
+<li>务必使同志们继续地保持艰苦奋斗的作风。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>说明：得民心者得天下。</p>
+<h2 id="结论：没有共产党，就没有新中国"><a href="#结论：没有共产党，就没有新中国" class="headerlink" title="结论：没有共产党，就没有新中国"></a>结论：没有共产党，就没有新中国</h2><h3 id="（一）人民群众基于自己的亲身体验所确认的客观真理"><a href="#（一）人民群众基于自己的亲身体验所确认的客观真理" class="headerlink" title="（一）人民群众基于自己的亲身体验所确认的客观真理"></a>（一）人民群众基于自己的亲身体验所确认的客观真理</h3><ol>
+<li>中国共产党从诞生之日起，就把为中国人民谋幸福、为中华民族谋复兴确立为自己的初心使命。</li>
+<li>为了实现初心使命，中国共产党进行了前赴后继的不懈奋斗，作出了巨大的牺牲。</li>
+<li>中国共产党为中国人民指明了斗争的目标，找到了中国革命走向胜利的道路，创造了新民主主义革命时期的伟大成就，成立了新中国，开启了新纪元。</li>
+</ol>
+<h3 id="（二）历史和人民选择共产党的必然性"><a href="#（二）历史和人民选择共产党的必然性" class="headerlink" title="（二）历史和人民选择共产党的必然性"></a>（二）历史和人民选择共产党的必然性</h3><p>历史和人民选择共产党，不是偶然的，而是因为中国共产党是中国工人阶级的先锋队，也是中国人民和中华民族的先锋队。</p>
+<h4 id="中国共产党的先进性体现在："><a href="#中国共产党的先进性体现在：" class="headerlink" title="中国共产党的先进性体现在："></a>中国共产党的先进性体现在：</h4><ol>
+<li>具有先进的理论性。</li>
+<li>具有革命的彻底性。</li>
+<li>具有组织的严密性。</li>
+<li>具有区别其它任何政党的优良作风。</li>
+</ol>
+<blockquote>
+<p>习近平一再强调：“江山就是人民，人民就是江山，人心向背关系党的生死存亡。”</p>
+</blockquote>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/06/07/Foundations-of-Computing/">Foundations of Computing</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© JulianZBY | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
